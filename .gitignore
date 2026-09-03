@@ -1,0 +1,29 @@
+# Virtual environments
+.venv/
+venv/
+
+# Environment variables / secrets
+.env
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Jupyter
+.ipynb_checkpoints/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+
+# Logs
+*.log
+
+# Generated vector store
+vectorstore/*
+
+# Temporary files
+*.tmp
