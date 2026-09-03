@@ -1,0 +1,10 @@
+expense_id,employee_id,expense_type,amount,date,status,description
+EX5001,NC1001,Travel,4200,2026-08-12,Approved,Client meeting travel
+EX5002,NC1001,Meals,850,2026-08-12,Paid,Business lunch
+EX5003,NC1002,Office Supplies,1250,2026-08-15,Pending,External keyboard
+EX5004,NC1003,Travel,6800,2026-08-21,Approved,Conference travel
+EX5005,NC1004,Professional Event,3500,2026-08-18,Paid,Finance workshop
+EX5006,NC1005,Travel,2900,2026-08-25,Rejected,Unapproved travel booking
+EX5007,NC1006,Meals,640,2026-08-26,Pending,Customer meeting meal
+EX5008,NC1007,Office Supplies,980,2026-08-27,Approved,Testing accessories
+EX5009,NC1008,Professional Event,4500,2026-08-28,Paid,Marketing conference

@@ -1,0 +1,9 @@
+employee_id,name,department,designation,email,joining_date,location
+NC1001,Aarav Mehta,Data Analytics,Data Analyst,aarav.mehta@nexacore.example,2025-02-10,Bengaluru
+NC1002,Diya Nair,Engineering,Software Engineer,diya.nair@nexacore.example,2024-08-19,Chennai
+NC1003,Kabir Shah,Product,Product Analyst,kabir.shah@nexacore.example,2025-05-12,Mumbai
+NC1004,Meera Iyer,Finance,Finance Analyst,meera.iyer@nexacore.example,2024-11-04,Bengaluru
+NC1005,Rohan Kapoor,Human Resources,HR Specialist,rohan.kapoor@nexacore.example,2025-01-20,Hyderabad
+NC1006,Ananya Rao,Customer Success,Customer Success Executive,ananya.rao@nexacore.example,2025-07-07,Pune
+NC1007,Vikram Singh,Engineering,QA Engineer,vikram.singh@nexacore.example,2024-06-17,Chennai
+NC1008,Ishita Bose,Marketing,Marketing Executive,ishita.bose@nexacore.example,2025-03-03,Mumbai

@@ -1,0 +1,6 @@
+office_id,city,address,working_hours,facilities
+OFF001,Bengaluru,"NexaCore Tech Park, Whitefield",09:30-18:30,Cafeteria; Wi-Fi; Meeting Rooms; Parking
+OFF002,Chennai,"NexaCore Business Centre, Guindy",09:30-18:30,Cafeteria; Wi-Fi; Meeting Rooms; Parking
+OFF003,Mumbai,"NexaCore Tower, Andheri East",09:30-18:30,Cafeteria; Wi-Fi; Meeting Rooms
+OFF004,Hyderabad,"NexaCore Workspace, HITEC City",09:30-18:30,Cafeteria; Wi-Fi; Meeting Rooms; Parking
+OFF005,Pune,"NexaCore Campus, Hinjawadi",09:30-18:30,Cafeteria; Wi-Fi; Meeting Rooms; Parking

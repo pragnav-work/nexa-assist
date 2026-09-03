@@ -1,0 +1,41 @@
+NEXACORE TECHNOLOGIES PVT. LTD.
+WORK FROM HOME POLICY
+
+Policy ID: NC-HR-002
+Effective Date: 2026-01-01
+
+1. ELIGIBILITY
+
+Employees may use up to 8 Work From Home (WFH) days per calendar month.
+
+WFH is intended for focused work, personal logistics, or temporary commuting constraints.
+
+Certain office-based activities may require employees to work from the office.
+
+2. WFH REQUEST RULES
+
+Employees should request planned WFH at least 1 working day in advance.
+
+The employee must remain reachable during normal working hours.
+
+WFH requests should include:
+- Requested date
+- Short reason for working remotely
+
+3. WORKING HOURS
+
+Standard working hours are 9:30 AM to 6:30 PM, Monday to Friday, unless the employee's team follows a different schedule.
+
+Employees must attend required meetings and maintain normal communication while working remotely.
+
+4. OFFICE PRESENCE
+
+Employees may be asked to attend important meetings, workshops, onboarding activities, or team events at an office location.
+
+5. NEXAASSIST SCOPE
+
+NexaAssist can explain WFH rules and the monthly WFH limit.
+
+The demo assistant does not submit WFH requests unless a dedicated WFH action tool is enabled.
+
+This document is fictional and created for the NexaAssist training/demo project.

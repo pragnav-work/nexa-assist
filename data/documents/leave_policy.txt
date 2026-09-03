@@ -1,0 +1,53 @@
+NEXACORE TECHNOLOGIES PVT. LTD.
+EMPLOYEE LEAVE POLICY
+
+Policy ID: NC-HR-001
+Effective Date: 2026-01-01
+
+1. LEAVE CATEGORIES
+
+Casual Leave (CL):
+Employees are entitled to 12 days of Casual Leave per calendar year for short personal needs.
+
+Earned Leave (EL):
+Employees are entitled to 18 days of Earned Leave per calendar year for planned time off.
+
+Sick Leave (SL):
+Employees are entitled to 10 days of Sick Leave per calendar year for illness or medical recovery.
+
+2. LEAVE REQUEST RULES
+
+Employees should submit planned leave at least 2 working days before the start date.
+
+Every leave request must specify:
+- Leave type
+- Start date
+- End date
+
+For this NexaAssist demo, leave duration is calculated using calendar days.
+
+Employees cannot request more leave days than their available balance.
+
+3. WORK FROM HOME AND LEAVE
+
+WFH is governed by the separate Work From Home Policy.
+
+A WFH day is not deducted from Casual Leave, Earned Leave, or Sick Leave unless the employee also submits a leave request.
+
+4. LEAVE CANCELLATION
+
+A submitted leave request may be cancelled before its start date.
+
+Cancelled leave requests do not reduce the employee's leave balance.
+
+5. NEXAASSIST SCOPE
+
+NexaAssist can:
+- Answer leave policy questions.
+- Check an employee's available leave balance.
+- Validate a leave request.
+- Submit a leave request after employee confirmation.
+
+NexaAssist does not approve leave on behalf of a manager or HR team.
+
+This document is fictional and created for the NexaAssist training/demo project.

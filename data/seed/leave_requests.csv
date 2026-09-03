@@ -1,0 +1,5 @@
+request_id,employee_id,leave_type,start_date,end_date,days,status,created_at
+LR7001,NC1001,Casual Leave,2026-08-03,2026-08-04,2,Approved,2026-07-28 10:15:00
+LR7002,NC1002,Earned Leave,2026-08-14,2026-08-15,2,Approved,2026-08-05 09:20:00
+LR7003,NC1003,Casual Leave,2026-08-28,2026-08-29,2,Pending,2026-08-20 14:10:00
+LR7004,NC1004,Sick Leave,2026-08-06,2026-08-06,1,Approved,2026-08-06 08:30:00

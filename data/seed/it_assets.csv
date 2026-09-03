@@ -1,0 +1,10 @@
+asset_id,employee_id,asset_type,asset_name,serial_number,status,assigned_date
+AS1001,NC1001,Laptop,Dell Latitude 7450,NX-LT-1001,Assigned,2025-02-10
+AS1002,NC1001,Monitor,Dell 24-inch Monitor,NX-MN-1001,Assigned,2025-02-12
+AS1003,NC1002,Laptop,Lenovo ThinkPad T14,NX-LT-1002,Assigned,2024-08-19
+AS1004,NC1003,Laptop,HP EliteBook 840,NX-LT-1003,Assigned,2025-05-12
+AS1005,NC1004,Laptop,Dell Latitude 7440,NX-LT-1004,Assigned,2024-11-04
+AS1006,NC1005,Laptop,Lenovo ThinkPad T14,NX-LT-1005,Assigned,2025-01-20
+AS1007,NC1006,Laptop,HP EliteBook 840,NX-LT-1006,Assigned,2025-07-07
+AS1008,NC1007,Laptop,Dell Latitude 7440,NX-LT-1007,Assigned,2024-06-17
+AS1009,NC1008,Laptop,Lenovo ThinkPad T14,NX-LT-1008,Assigned,2025-03-03
