@@ -1,0 +1,10 @@
+google-genai
+langchain
+langchain-core
+langchain-community
+faiss-cpu
+pypdf
+python-dotenv
+pandas
+streamlit
+pytest
