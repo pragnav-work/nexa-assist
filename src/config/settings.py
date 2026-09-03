@@ -20,4 +20,4 @@ if not GOOGLE_API_KEY:
     )
 
 # Gemini model to be used across the application
-GEMINI_MODEL = "gemini-2.5-flash"
+GEMINI_MODEL = "gemini-3.6-flash"
