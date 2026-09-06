@@ -117,7 +117,16 @@ def apply_leave(
     if existing_requests.empty:
         request_id = "LR7001"
     else:
-        request_id = f"LR{7001 + len(existing_requests):04d}"
+        existing_numbers = (
+            existing_requests["request_id"]
+            .astype(str)
+            .str.extract(r"(\d+)", expand=False)
+            .dropna()
+            .astype(int)
+        )
+
+        next_number = existing_numbers.max() + 1
+        request_id = f"LR{next_number:04d}"
 
     record = {
         "request_id": request_id,

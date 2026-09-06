@@ -60,37 +60,15 @@ def submit_expense(
 ) -> dict:
     """Submit a new expense for reimbursement."""
 
+    employee_id = employee_id.strip().upper()
     expense_type_normalized = expense_type.strip().lower()
+    description = description.strip()
 
-    if expense_type_normalized not in VALID_EXPENSE_TYPES:
-        return {
-            "success": False,
-            "message": (
-                "Invalid expense type. "
-                "Allowed types: Travel, Meals, Office Supplies, "
-                "Professional Event."
-            ),
-        }
-
-    if amount <= 0:
-        return {
-            "success": False,
-            "message": "Expense amount must be greater than zero.",
-        }
-
-    try:
-        datetime.strptime(date, "%Y-%m-%d")
-    except ValueError:
-        return {
-            "success": False,
-            "message": "Date must use YYYY-MM-DD format.",
-        }
-
-    # Verify employee exists
+    # Validate employee
     employees = read_csv("employees.csv")
 
     employee = employees[
-        employees["employee_id"].astype(str).str.upper() == employee_id.upper()
+        employees["employee_id"].astype(str).str.upper() == employee_id
     ]
 
     if employee.empty:
@@ -99,16 +77,64 @@ def submit_expense(
             "message": f"Employee {employee_id} not found.",
         }
 
+    # Validate expense type
+    if expense_type_normalized not in VALID_EXPENSE_TYPES:
+        return {
+            "success": False,
+            "message": "Invalid expense type.",
+        }
+
+    # Validate amount
+    try:
+        amount = float(amount)
+    except (TypeError, ValueError):
+        return {
+            "success": False,
+            "message": "Expense amount must be a valid number.",
+        }
+
+    if amount <= 0:
+        return {
+            "success": False,
+            "message": "Expense amount must be greater than zero.",
+        }
+
+    # Validate date
+    try:
+        datetime.strptime(date, "%Y-%m-%d")
+    except ValueError:
+        return {
+            "success": False,
+            "message": "Date must use YYYY-MM-DD format.",
+        }
+
+    # Validate description
+    if not description:
+        return {
+            "success": False,
+            "message": "Expense description cannot be empty.",
+        }
+
+    # Generate next expense ID
     expenses = read_csv("expense_records.csv")
 
     if expenses.empty:
         expense_id = "EX5001"
     else:
-        expense_id = f"EX{5001 + len(expenses):04d}"
+        existing_numbers = (
+            expenses["expense_id"]
+            .astype(str)
+            .str.extract(r"(\d+)", expand=False)
+            .dropna()
+            .astype(int)
+        )
+
+        next_number = existing_numbers.max() + 1
+        expense_id = f"EX{next_number:04d}"
 
     record = {
         "expense_id": expense_id,
-        "employee_id": employee_id.upper(),
+        "employee_id": employee_id,
         "expense_type": expense_type.title(),
         "amount": amount,
         "date": date,
