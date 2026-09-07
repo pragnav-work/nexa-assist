@@ -13,3 +13,4 @@ mcp-types==2.1.1
 
 pytest
 pytest-asyncio
+sentence-transformers

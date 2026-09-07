@@ -1,6 +1,11 @@
 from src.rag.retriever import PolicyRetriever
 from src.rag.citation import format_retrieved_context
+from google import genai
 
+from src.config.settings import (
+    GOOGLE_API_KEY,
+    GEMINI_MODEL,
+)
 
 class RAGPipeline:
     '''High-level interface for retrieving company policy information.'''
@@ -11,6 +16,7 @@ class RAGPipeline:
 
         # Load the saved FAISS index and chunk metadata.
         self.retriever.load()
+        self.client = genai.Client(api_key=GOOGLE_API_KEY)
 
     def retrieve(self, query, top_k=3):
         '''Retrieve relevant policy chunks for a user query.'''
@@ -34,3 +40,48 @@ class RAGPipeline:
             'results': results,
             'context': context
         }
+
+    def answer_query(self, query: str):
+
+        print("Step 1: Retrieving context...")
+
+        data = self.retrieve_with_context(query)
+
+        print("Step 2: Context retrieved.")
+
+        context = data["context"]
+
+        prompt = f"""
+    You are NexaAssist, an internal HR assistant.
+
+    Answer the user's question ONLY using the policy information below.
+
+    If the answer is not present, say:
+    "I couldn't find this information in the company policies."
+
+    Policy Context:
+    {context}
+
+    User Question:
+    {query}
+    """
+
+        print("Step 3: Calling Gemini...")
+        print("Using model:", GEMINI_MODEL)
+
+        try:
+            response = self.client.models.generate_content(
+                model=GEMINI_MODEL,
+                contents=prompt,
+                )
+
+            print("Step 4: Gemini replied.")
+
+        except Exception as e:
+            print("Gemini Exception:", repr(e))
+            raise
+
+        return {
+        "answer": response.text,
+        "citations": data["results"],
+    }

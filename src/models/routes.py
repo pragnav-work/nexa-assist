@@ -6,7 +6,6 @@ from enum import Enum
 
 
 class Route(str, Enum):
-    RAG = "RAG"
-    EMPLOYEE_DATA = "EMPLOYEE_DATA"
-    ACTION = "ACTION"
-    UNKNOWN = "UNKNOWN"
+    RAG = "rag"
+    MCP = "mcp"
+    UNKNOWN = "unknown"

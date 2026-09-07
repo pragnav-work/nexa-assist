@@ -9,17 +9,17 @@ from src.models.routes import Route
 
 
 class Router:
+    """
+    Decides which subsystem should handle a request.
+    """
 
     def route(self, intent: Intent) -> Route:
-        """
-        Decide which subsystem should handle the request.
-        """
 
-        routing_table = {
-            Intent.POLICY_QUERY: Route.RAG,
-            Intent.EMPLOYEE_DATA: Route.EMPLOYEE_DATA,
-            Intent.ACTION_REQUEST: Route.ACTION,
-            Intent.UNKNOWN: Route.UNKNOWN,
-        }
+        if intent == Intent.POLICY_QUERY:
+            return Route.RAG
 
-        return routing_table.get(intent, Route.UNKNOWN)
+        elif intent == Intent.UNKNOWN:
+            return Route.UNKNOWN
+
+        else:
+            return Route.MCP
