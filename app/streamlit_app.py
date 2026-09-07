@@ -25,7 +25,7 @@ employee = st.sidebar.selectbox(
 )
 
 current_employee_id = employee.split(" - ")[0]
-
+st.session_state.current_employee_id = current_employee_id
 st.sidebar.divider()
 
 st.sidebar.subheader("Current Session")

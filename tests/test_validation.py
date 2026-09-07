@@ -126,3 +126,12 @@ def test_confirmation_accepted():
 
     assert result["valid"] is True
     assert result["errors"] == []
+
+def test_employee_cannot_access_another_employee_data():
+    result = validate_employee_context(
+        session_employee_id="NC1001",
+        requested_employee_id="NC1002",
+    )
+
+    assert result["valid"] is False
+    assert "current employee session" in result["errors"][0]
