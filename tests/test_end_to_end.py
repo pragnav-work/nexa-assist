@@ -9,6 +9,7 @@ from src.validation.validator import (
 
 def test_end_to_end_blocks_cross_employee_access():
     """Another employee's data must not be accessible."""
+
     result = validate_employee_context(
         session_employee_id="NC1001",
         requested_employee_id="NC1002",
@@ -20,6 +21,7 @@ def test_end_to_end_blocks_cross_employee_access():
 
 def test_end_to_end_blocks_leave_exceeding_balance():
     """A leave request exceeding the available balance must be rejected."""
+
     result = validate_leave_request(
         session_employee_id="NC1001",
         requested_employee_id="NC1001",
@@ -36,6 +38,7 @@ def test_end_to_end_blocks_leave_exceeding_balance():
 
 def test_end_to_end_valid_leave_requires_confirmation():
     """A valid leave request must still require explicit confirmation."""
+
     leave_result = validate_leave_request(
         session_employee_id="NC1001",
         requested_employee_id="NC1001",
@@ -56,6 +59,7 @@ def test_end_to_end_valid_leave_requires_confirmation():
 
 def test_end_to_end_confirmed_leave_can_proceed():
     """A valid leave request can proceed after explicit confirmation."""
+
     leave_result = validate_leave_request(
         session_employee_id="NC1001",
         requested_employee_id="NC1001",
@@ -76,6 +80,7 @@ def test_end_to_end_confirmed_leave_can_proceed():
 
 def test_end_to_end_past_leave_date_is_blocked():
     """A leave request starting in the past must be rejected."""
+
     result = validate_leave_request(
         session_employee_id="NC1001",
         requested_employee_id="NC1001",
@@ -92,6 +97,7 @@ def test_end_to_end_past_leave_date_is_blocked():
 
 def test_end_to_end_invalid_leave_dates_are_blocked():
     """A leave request with an invalid date range must be rejected."""
+
     result = validate_leave_request(
         session_employee_id="NC1001",
         requested_employee_id="NC1001",
@@ -108,6 +114,7 @@ def test_end_to_end_invalid_leave_dates_are_blocked():
 
 def test_end_to_end_missing_leave_type_is_blocked():
     """A leave request without a leave type must be rejected."""
+
     result = validate_leave_request(
         session_employee_id="NC1001",
         requested_employee_id="NC1001",
