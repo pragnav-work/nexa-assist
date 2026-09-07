@@ -1,4 +1,16 @@
+google-genai
+langchain
+langchain-core
+langchain-community
+faiss-cpu
+pypdf
+python-dotenv
+pandas
+streamlit
+
 mcp==2.1.1
 mcp-types==2.1.1
+
 pytest
 pytest-asyncio
+sentence-transformers

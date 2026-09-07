@@ -1,3 +1,12 @@
+import os
+
+SYSTEM_CA = "/etc/ssl/certs/ca-certificates.crt"
+
+os.environ["REQUESTS_CA_BUNDLE"] = SYSTEM_CA
+os.environ["SSL_CERT_FILE"] = SYSTEM_CA
+os.environ["CURL_CA_BUNDLE"] = SYSTEM_CA
+
+print("Using certificate bundle:", SYSTEM_CA)
 from sentence_transformers import SentenceTransformer
 
 from src.rag.config import EMBEDDING_MODEL
