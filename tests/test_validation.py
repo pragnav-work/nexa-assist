@@ -120,6 +120,11 @@ def test_confirmation_required():
     assert result["valid"] is False
     assert "confirmation is required" in result["errors"][0]
 
+def test_unconfirmed_action_cannot_proceed():
+    result = validate_action_confirmation(False)
+
+    assert result["valid"] is False
+    assert len(result["errors"]) > 0
 
 def test_confirmation_accepted():
     result = validate_action_confirmation(True)
