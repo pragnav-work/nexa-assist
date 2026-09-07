@@ -17,14 +17,11 @@ from src.rag.pipeline import RAGPipeline
 class OfficeAssistant:
 
     def __init__(self):
-
         self.intent_classifier = IntentClassifier()
         self.router = Router()
 
-        # Will be connected after RAG module is merged
         self.rag_engine = RAGPipeline()
 
-        # MCP Tool Dispatcher
         self.tool_dispatcher = ToolDispatcher()
 
     def process_query(
@@ -42,19 +39,19 @@ class OfficeAssistant:
         state.intent = self.intent_classifier.classify(
             state.user_query
         )
-        state.intent = self.intent_classifier.classify(state.user_query)
 
         # Step 2: Decide where to route it
         state.route = self.router.route(
             state.intent
         )
-        state.route = self.router.route(state.intent)
 
         # Step 3: Execute the selected route
         if state.route == Route.RAG:
             print("Entering RAG block")
-            result = self.rag_engine.answer_query(state.user_query)
-            print(result)
+
+            result = self.rag_engine.answer_query(
+                state.user_query
+            )
 
             state.response = result["answer"]
             state.citations = result["citations"]
@@ -63,12 +60,15 @@ class OfficeAssistant:
             state.tool_name = state.intent.value
 
             state.response = self.tool_dispatcher.execute(
-            intent=state.intent,
-            employee_id=state.employee_id,
-            query=state.user_query,
-        )
-        else:
+                intent=state.intent,
+                employee_id=state.employee_id,
+                query=state.user_query,
+            )
 
-            state.response = "Sorry, I couldn't understand your request."
+        else:
+            state.response = (
+                "Sorry, I couldn't understand your request."
+            )
 
         return state
+
