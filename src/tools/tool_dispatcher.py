@@ -37,30 +37,50 @@ class ToolDispatcher:
         if tool is None:
             return "Requested tool is not available."
 
-        # Leave balance
+        # -------------------------------------------------
+        # Read-only employee tools
+        # -------------------------------------------------
+
         if intent == Intent.LEAVE_BALANCE:
             return tool(kwargs["employee_id"])
 
-        # Leave requests
         elif intent == Intent.LEAVE_REQUESTS:
             return tool(kwargs["employee_id"])
 
-        # Employee info
         elif intent == Intent.EMPLOYEE_INFO:
             return tool(kwargs["employee_id"])
 
-        # Employee expenses
         elif intent == Intent.EMPLOYEE_EXPENSES:
             return tool(kwargs["employee_id"])
 
-        # Assigned assets
         elif intent == Intent.ASSIGNED_ASSETS:
             return tool(kwargs["employee_id"])
 
-        # Office location (this tool probably expects the query)
         elif intent == Intent.OFFICE_LOCATION:
             return tool(kwargs["query"])
 
-        # Leave application / expense submission will need parameter extraction later
-        else:
-            return tool(**kwargs)
+        elif intent == Intent.EXPENSE_STATUS:
+            return tool(kwargs["query"])
+
+        # -------------------------------------------------
+        # State-changing tools
+        # -------------------------------------------------
+
+        elif intent == Intent.SUBMIT_LEAVE:
+            return tool(
+                employee_id=kwargs["employee_id"],
+                leave_type=kwargs["leave_type"],
+                start_date=kwargs["start_date"],
+                end_date=kwargs["end_date"],
+            )
+
+        elif intent == Intent.SUBMIT_EMPLOYEE_EXPENSE:
+            return tool(
+                employee_id=kwargs["employee_id"],
+                expense_type=kwargs["expense_type"],
+                amount=kwargs["amount"],
+                expense_date=kwargs["expense_date"],
+                description=kwargs["description"],
+            )
+
+        return "Requested tool is not available."

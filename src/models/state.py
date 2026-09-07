@@ -33,4 +33,7 @@ class AgentState:
     response: str | None = None
 
     # RAG citations
-    citations: list[str] = field(default_factory=list)
+    citations: list = field(default_factory=list)
+
+    # Structured action waiting for user confirmation
+    pending_action: dict | None = None
