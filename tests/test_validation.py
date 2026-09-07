@@ -140,3 +140,23 @@ def test_employee_cannot_access_another_employee_data():
 
     assert result["valid"] is False
     assert "current employee session" in result["errors"][0]
+
+def test_cancelled_action_is_not_confirmed():
+    result = validate_action_confirmation(False)
+
+    assert result["valid"] is False
+    assert result["errors"]
+
+def test_leave_start_date_cannot_be_in_past():
+    result = validate_leave_request(
+        session_employee_id="NC1001",
+        requested_employee_id="NC1001",
+        leave_type="earned_leave",
+        start_date=date(2026, 1, 1),
+        end_date=date(2026, 1, 2),
+        requested_days=2,
+        available_balance=10,
+    )
+
+    assert result["valid"] is False
+    assert "cannot be in the past" in result["errors"][0]

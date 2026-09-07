@@ -62,8 +62,15 @@ def validate_leave_request(
         requested_employee_id,
     )
 
+    # Date validation
+    if not start_date or not end_date:
+        errors.append("Start date and end date are required.")
+    elif start_date > end_date:
+        errors.append("Start date cannot be after end date.")
+    elif start_date < date.today():
+        errors.append("Leave start date cannot be in the past.")    
     if not employee_result["valid"]:
-        errors.extend(employee_result["errors"])
+            errors.extend(employee_result["errors"])
 
     # Required field
     if not leave_type:
