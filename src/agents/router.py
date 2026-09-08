@@ -17,6 +17,9 @@ class Router:
 
         if intent == Intent.POLICY_QUERY:
             return Route.RAG
+        
+        elif intent==Intent.GREETING:
+            return Route.GREETING
 
         elif intent == Intent.UNKNOWN:
             return Route.UNKNOWN
