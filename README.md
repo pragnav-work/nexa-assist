@@ -1,4 +1,4 @@
-:robot_face: NexaAssist — AI Enterprise Employee Assistant
+# NexaAssist — AI Enterprise Employee Assistant
 NexaAssist is an Agentic AI-powered enterprise employee assistant designed to help employees access company policies, retrieve employee-specific information, and perform supported workplace actions through a conversational interface.
 The project combines LLM-based intent classification, RAG (Retrieval-Augmented Generation), MCP-style enterprise tools, deterministic validation, and human confirmation to provide a practical and safe employee-assistance workflow.
 
