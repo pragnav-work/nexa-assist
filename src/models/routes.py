@@ -8,4 +8,5 @@ from enum import Enum
 class Route(str, Enum):
     RAG = "rag"
     MCP = "mcp"
+    GREETING = "greeting"
     UNKNOWN = "unknown"

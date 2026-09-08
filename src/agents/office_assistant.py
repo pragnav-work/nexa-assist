@@ -248,12 +248,8 @@ class OfficeAssistant:
 
                 return state
 
-            # -------------------------------------------------
-            # IMPORTANT:
             # Do NOT call apply_leave() here.
-            #
             # Store the action for explicit confirmation.
-            # -------------------------------------------------
 
             state.pending_action = {
                 "action_type": "submit_leave",
@@ -271,10 +267,19 @@ class OfficeAssistant:
             return state
 
         # -------------------------------------------------
-        # Step 5: RAG
+        # Step 5: Execute the selected route
         # -------------------------------------------------
 
-        if state.route == Route.RAG:
+        if state.route == Route.GREETING:
+
+            state.response = (
+                "Hello! I'm NexaAssist. "
+                "I can help you with company policies, leave management, "
+                "expenses, employee information, office details, and IT assets. "
+                "How can I assist you today?"
+            )
+
+        elif state.route == Route.RAG:
 
             result = self.rag_engine.answer_query(
                 state.user_query
@@ -302,5 +307,4 @@ class OfficeAssistant:
             state.response = (
                 "Sorry, I couldn't understand your request."
             )
-
         return state
