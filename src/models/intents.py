@@ -9,6 +9,9 @@ class Intent(str, Enum):
     # RAG
     POLICY_QUERY = "policy_query"
 
+    #Greeting
+    GREETING = "greeting"
+
     # MCP Tools
     EMPLOYEE_INFO = "employee_info"
 
