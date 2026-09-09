@@ -434,6 +434,7 @@ if user_input:
         state = assistant.process_query(
             user_query=user_input,
             employee_id=st.session_state.current_employee_id,
+            conversation_history=st.session_state.messages[:-1],
         )
 
         # -------------------------------------------------

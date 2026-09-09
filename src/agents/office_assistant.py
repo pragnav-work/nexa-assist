@@ -10,7 +10,6 @@ from datetime import date
 
 from src.agents.intent_classifier import IntentClassifier
 from src.agents.router import Router
-
 from src.models.routes import Route
 from src.models.state import AgentState
 from src.models.intents import Intent
@@ -35,7 +34,6 @@ class OfficeAssistant:
         self.rag_engine = RAGPipeline()
 
         self.tool_dispatcher = ToolDispatcher()
-
     # -----------------------------------------------------
     # Employee ID extraction
     # -----------------------------------------------------
@@ -65,14 +63,15 @@ class OfficeAssistant:
     def _extract_leave_request(
         self,
         user_query: str,
+        conversation_history: list[dict] | None = None,
     ) -> dict | None:
         """
-        Deterministically extracts leave information from
-        a natural-language request.
+    Deterministically extracts leave information.
 
-        Supported example:
-
-        "I want earned leave from 2026-09-15 to 2026-09-17"
+    Supports:
+    - Explicit leave requests with YYYY-MM-DD dates
+    - Follow-ups such as:
+      "Can I use 3 of them next week?"
         """
 
         if not user_query:
@@ -80,7 +79,10 @@ class OfficeAssistant:
 
         text = user_query.lower()
 
-        # Leave type
+    # -------------------------------------------------
+    # Leave type
+    # -------------------------------------------------
+
         leave_type = None
 
         leave_type_patterns = {
@@ -94,22 +96,102 @@ class OfficeAssistant:
                 leave_type = name
                 break
 
-        # Dates
+    # If follow-up does not mention leave type,
+    # recover it from recent conversation.
+        if not leave_type and conversation_history:
+
+            for message in reversed(conversation_history):
+
+                content = message.get("content", "").lower()
+
+                for name, pattern in leave_type_patterns.items():
+
+                    if re.search(pattern, content):
+                        leave_type = name
+                        break
+
+                if leave_type:
+                    break
+
+    # -------------------------------------------------
+    # Explicit dates
+    # -------------------------------------------------
+
         dates = re.findall(
             r"\b\d{4}-\d{2}-\d{2}\b",
             user_query,
         )
 
-        if not leave_type or len(dates) < 2:
-            return None
+        start_date = None
+        end_date = None
 
-        try:
-            start_date = date.fromisoformat(dates[0])
-            end_date = date.fromisoformat(dates[1])
-        except ValueError:
-            return None
+        if len(dates) >= 2:
 
-        requested_days = (end_date - start_date).days + 1
+            try:
+                start_date = date.fromisoformat(dates[0])
+                end_date = date.fromisoformat(dates[1])
+            except ValueError:
+                return None
+
+    # -------------------------------------------------
+    # Requested number of days
+    # -------------------------------------------------
+
+        requested_days = None
+
+        days_match = re.search(
+            r"\b(\d+)\s+(?:days?|of\s+(?:them|those|these))\b",
+            text,
+        )
+
+        if days_match:
+            requested_days = int(days_match.group(1))
+
+    # -------------------------------------------------
+    # "next week"
+    # -------------------------------------------------
+
+        if "next week" in text and requested_days:
+
+            today = date.today()
+
+            days_until_monday = (7 - today.weekday()) % 7
+
+            if days_until_monday == 0:
+                days_until_monday = 7
+
+            start_date = today.fromordinal(
+                today.toordinal() + days_until_monday
+            )
+
+            end_date = start_date.fromordinal(
+                start_date.toordinal() + requested_days - 1
+            )
+
+    # -------------------------------------------------
+    # Calculate days for explicit date range
+    # -------------------------------------------------
+
+        if (
+            requested_days is None
+            and start_date
+            and end_date
+        ):
+            requested_days = (
+                end_date - start_date
+            ).days + 1
+
+    # -------------------------------------------------
+    # Required fields
+    # -------------------------------------------------
+
+        if (
+            not leave_type
+            or not start_date
+            or not end_date
+            or not requested_days
+        ):
+            return None
 
         return {
             "leave_type": leave_type,
@@ -126,6 +208,7 @@ class OfficeAssistant:
         self,
         user_query: str,
         employee_id: str,
+        conversation_history: list[dict] | None = None,
     ) -> AgentState:
 
         state = AgentState(
@@ -162,7 +245,8 @@ class OfficeAssistant:
         # -------------------------------------------------
 
         state.intent = self.intent_classifier.classify(
-            state.user_query
+            state.user_query,
+            conversation_history=conversation_history,
         )
 
         # -------------------------------------------------
@@ -180,7 +264,8 @@ class OfficeAssistant:
         if state.intent == Intent.SUBMIT_LEAVE:
 
             leave_data = self._extract_leave_request(
-                user_query
+                user_query,
+                conversation_history=conversation_history,
             )
 
             if not leave_data:
