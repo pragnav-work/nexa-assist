@@ -27,3 +27,4 @@ vectorstore/*
 
 # Temporary files
 *.tmp
+data/session.db
