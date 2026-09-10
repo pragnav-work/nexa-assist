@@ -295,6 +295,7 @@ The application maintains conversation state during the active Streamlit session
 
 📁 Project Structure
 
+```text
 nexa-assist/
 │
 ├── app/
@@ -371,6 +372,7 @@ nexa-assist/
 ├── requirements.txt
 ├── .env.example
 └── README.md
+```
 
 ⚙️ Technology Stack
 
